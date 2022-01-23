@@ -29,5 +29,8 @@
     "express": "^4.17.2",
     "mongoose": "^6.1.7",
     "yarn": "^1.22.17"
+  },
+  "devDependencies": {
+    "typescript": "^4.5.5"
   }
 }
