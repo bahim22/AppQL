@@ -1,0 +1,33 @@
+{
+  "name": "menan-ded",
+  "version": "1.0.0",
+  "description": "back-end of fullstack ded app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bahim22/menan-ded.git"
+  },
+  "keywords": [
+    "mern",
+    "express",
+    "mongodb",
+    "apollo"
+  ],
+  "author": "Hima Dionysus Balde",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bahim22/menan-ded/issues"
+  },
+  "homepage": "https://github.com/bahim22/menan-ded#readme",
+  "dependencies": {
+    "apollo-server": "^3.6.2",
+    "apollo-server-express": "^3.6.2",
+    "bluebird": "^3.7.2",
+    "express": "^4.17.2",
+    "mongoose": "^6.1.7",
+    "yarn": "^1.22.17"
+  }
+}
