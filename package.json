@@ -26,6 +26,7 @@
     "apollo-server": "^3.6.2",
     "apollo-server-express": "^3.6.2",
     "bluebird": "^3.7.2",
+    "dotenv": "^14.3.2",
     "express": "^4.17.2",
     "mongoose": "^6.1.7",
     "yarn": "^1.22.17"
