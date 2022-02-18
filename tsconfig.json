@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "ES2018",
+    "module": "commonjs",
+    "lib": [
+      "esnext"
+    ],
+    "strict": true,
+    "rootDir": ".",
+    "outDir": "dist",
+    "sourceMap": true,
+    "esModuleInterop": true
+    // "strict": true,
+    // "rootDir": ".",
+    // "outDir": "dist",
+    // "sourceMap": true,
+    // "esModuleInterop": true,
+    // "allowJs": true,
+    // "skipLibCheck": true,
+    // "allowSyntheticDefaultImports": true,
+    // "forceConsistentCasingInFileNames": true,
+    // "noFallthroughCasesInSwitch": true,
+    // "moduleResolution": "node",
+    // "resolveJsonModule": true,
+    // "isolatedModules": true,
+    // "noEmit": true,
+    // "jsx": "react-jsx"
+    },
+    "include": [
+      "src"
+    ]
+  }

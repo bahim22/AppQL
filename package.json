@@ -1,0 +1,39 @@
+{
+  "name": "menan-ded",
+  "version": "1.2.0",
+  "description": "TypeScript React App using GraphQL, Apollo Client, Nexus",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bahim22/menan-ded.git"
+  },
+  "keywords": [
+    "React",
+    "Next",
+    "GraphQL",
+    "Apollo",
+    "Client",
+    "Nexus"
+  ],
+  "author": "Hima Dionysus Balde",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bahim22/menan-ded/issues"
+  },
+  "homepage": "https://github.com/bahim22/menan-ded#readme",
+  "devDependencies": {
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.5.5"
+  },
+  "dependencies": {
+    "apollo-server": "^3.6.3",
+    "graphql": "^16.3.0",
+    "nexus": "^1.2.0"
+  }
+}
