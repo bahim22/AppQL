@@ -1,0 +1,12 @@
+./postcss.config.js
+./tailwind.config.js
+./build
+./node_modules
+./public
+./tw.js
+./webpack.config.js
+package.json
+package-lock.json
+./babelrc
+./prettierrc
+./vercel.json
