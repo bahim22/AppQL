@@ -3,10 +3,31 @@
 
 ## Schema
 
+A. schema.ts: generate schema w/ *Nexus*
+
 - A schema is a collection of type definitions (hence "typeDefs") that together define the "shape" of queries that are executed against your data
-- Schema is req so the gql service can define a set of types that describes the set of possible data one  query on that service
-- The type def enables a query named books which will return an array of >= 0 books from server
+- Schema is req so the gql service can define a set of types that describes the set of possible data one can query on that service
+- The type def enables a query which will return an array from server
 - defines structure of the data
+
+1. 1st output file: Nexus creates a GQL schema file w/ type *.graphql*
+   1. GQL Schema Definition Langauge (*SDL*) which sets the structure of the API
+2. 2nd output file: *typegen*: will have TS type def for the types in the schema
+   1. this keeps the schema def synced w/ the schema implementation
+
+```ts
+(alias) function makeSchema(config: SchemaConfig): NexusGraphQLSchema import makeSchema
+//
+(alias) (method) join(...paths: string[]): string import join
+```
+
+> Defines the GraphQL schema, by combining the GraphQL types defined by the GraphQL Nexus layer or any manually defined GraphQLType objects. Requires at least one type be named "Query", which will be used as the root query type.
+> Join all arguments together and normalize the resulting path. Arguments must be strings. In v0.8, non-string arguments were silently ignored. In v0.10 and up, an exception is thrown.
+
+- run npx ts-node --transpile-only src/schema
+- enables Nexus to create schema.graphql and nexus-trypegen.ts
+  - typegen has auto-gen TS interface & type defs which are auto added to Nexus func signatures
+- create generate and dev tasks in script section of pack.json to update the schema and typegen files and the dev scipt to start server
 
 ```js
 const { ApolloServer, gql } = require('apollo-server');
@@ -23,16 +44,4 @@ const typeDefsOne = gql`
   `;
 ```
 
-1. schema.ts: generate schema w/ *Nexus*
-
-- Schema.ts
-
-```ts
-(alias) function makeSchema(config: SchemaConfig): NexusGraphQLSchema import makeSchema
-```
-
-> Defines the GraphQL schema, by combining the GraphQL types defined by the GraphQL Nexus layer or any manually defined GraphQLType objects. Requires at least one type be named "Query", which will be used as the root query type.
-
->(alias) (method) join(...paths: string[]): string import join
-
-Join all arguments together and normalize the resulting path. Arguments must be strings. In v0.8, non-string arguments were silently ignored. In v0.10 and up, an exception is thrown.
+B. index.ts: create GQL web server w/ *apollo*

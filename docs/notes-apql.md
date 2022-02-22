@@ -23,9 +23,6 @@
 
 ## ApolloServer: create instance of server and start server
 
-1. schema.ts: generate schema w/ *Nexus*
-2. index.ts: create GQL web server w/ *apollo*
-
 ## Exe init query
 
 ### References
