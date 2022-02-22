@@ -7,7 +7,7 @@
 
 | Title            | Date       | Author       | Description                                     |
 | ---------------- | ---------- | ------------ | ----------------------------------------------- |
-| menan-ded | 02/01/2022 | `Hima Balde` | Next App with graphQL and Apollo |
+| next-ded-apql | 02/01/2022 | `Hima Balde` | Next App with graphQL and Apollo |
 
 | Type                 | Use Case        | Completed | OS       |
 | -------------------- | --------------- | --------- | -------- |
