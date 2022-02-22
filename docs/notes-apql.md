@@ -17,9 +17,16 @@
 - schema.graphql(GQL SDL) file auto-gen
 - works with apollo-server and GQL middleware
 
+### Apollo Studio Explorer
+
+- online, web-based GQL IDE
+- use for running queries & exploring schema
+
 ## Dataset
 
 ## Define a resolver
+
+## create schema and server
 
 ## ApolloServer: create instance of server and start server
 

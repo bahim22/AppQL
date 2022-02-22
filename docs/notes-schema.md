@@ -44,4 +44,40 @@ const typeDefsOne = gql`
   `;
 ```
 
-B. index.ts: create GQL web server w/ *apollo*
+B. *index.ts*: create GQL web server w/ *apollo*
+
+```ts
+(method) ApolloServer.listen(...opts: any[]): Promise<ServerInfo>
+(alias) new ApolloServer(config: ApolloServerExpressConfig & {
+    cors?: boolean | e.CorsOptions | undefined;
+    onHealthCheck?: ((req: e.Request<ParamsDictionary, any, any, QueryString.ParsedQs, Record<...>>) => Promise<...>) | undefined;
+    healthCheckPath?: string | ... 1 more ... | undefined;
+    stopGracePeriodMillis?: number | undefined;
+}): ApolloServer
+import ApolloServer
+
+then(onfulfilled?: ((value: ServerInfo) => ServerInfo | PromiseLike<ServerInfo>) | null | undefined, onrejected?: ((reason: any) => PromiseLike<never>) | null | undefined): Promise<ServerInfo>
+```
+
+- The callback to execute when the Promise is resolved.
+- Attaches callbacks for the resolution and/or rejection of the Promise.
+- @returns — A Promise for the completion of which ever callback is executed.
+
+1. The Nexus created schema object defines the GQL schema
+   1. required when instantiating server so let Apollo Server know what API ops to support in GQL API
+2. Then start the server & create port
+   1. server rt url string inside a promise
+3. go to query your server to redirect to studio explorer
+   1. schema tab shows full GQL schema to look up schema details
+   2. explorer tab to test query
+
+___
+//query graph directly
+
+```shell
+curl --request POST \
+  --header 'content-type: application/json' \
+  --url http://localhost:3000/ \
+  --data '{"query":"query { __typename }"}'
+```
+___
