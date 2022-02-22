@@ -86,10 +86,56 @@ ___
 1. GQL schemas all contain 3 root types: Query, Mutation, Subscription, which correspond w/ the operation types.
    1. the fields are root fields & define available API ops
    2. each op has to start w/ a root field
-2. root field is ok, annotated as Boolean!
+   3. the <!> (non-nullable) makes it an error if you return null for that field
+2. Ex. 1: the type of the ok root field, annotated as Boolean! which rt true or false & the API only accepts one possible query
 
 ```ts
 type Query {
-	ok: Boolean!
+ ok: Boolean!
+ users: [User!]!
+ user(id:ID!): User
+}
+type Mutation {
+ createUser(name: String!): User!
+}
+type User {
+ id: ID!
+ name: String!
+}
+```
+
+1. Ex. 2: root fields = Query - users & user, Mutation - createUser
+2. the root field types = [User!]!, User & User!
+3. Scalar types: basic types containing no sub-fields
+   1. Int, Float, String, Boolean, ID
+4. if the root field type is an object type; you can expand it (query, mutation, or sub) w/ fields of that type (expanded section is the selection set)
+5. The GQL API that implements ex. 2 accepts the below operations
+
+- *Operations*
+  - query for all users, single user by id and create user
+  - when querying an object type, you must query >= 1 selection set field
+  - the 3 root fields have diff type modifiers (combos of being list and/or required) for the User type
+  - 1. users field w/ return type [User!]! returns list of User elements (non-null; always returns empty list or User objects)
+  - 2. user(id:ID!) field has return type User, that can return null or User object
+  - 3. createUser(name:String!) field, return type User!, op will always return User object
+
+```ts
+query {
+ users {
+  id
+  name
+ }
+}
+query {
+ user(id: 'user-1') {
+  id
+  name
+ }
+}
+mutation {
+ createUser(name:'Dean') {
+  id
+  name
+ }
 }
 ```
