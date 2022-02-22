@@ -80,4 +80,16 @@ curl --request POST \
   --url http://localhost:3000/ \
   --data '{"query":"query { __typename }"}'
 ```
+
 ___
+
+1. GQL schemas all contain 3 root types: Query, Mutation, Subscription, which correspond w/ the operation types.
+   1. the fields are root fields & define available API ops
+   2. each op has to start w/ a root field
+2. root field is ok, annotated as Boolean!
+
+```ts
+type Query {
+	ok: Boolean!
+}
+```
