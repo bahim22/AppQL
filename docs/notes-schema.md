@@ -139,3 +139,86 @@ mutation {
  }
 }
 ```
+
+___
+
+## GQL API Ddevelopment
+
+1. Use Nexus to Define the types, fields, root object types (components) of the schema
+2. run generate to create the GQL SDL & types (can use Nexus SDL converter)
+   1. SDL Converter<https://nexusjs.org/converter>
+3. implement resolver functions
+
+Object types are typically the most common kind of type present in a GraphQL schema. You give them a name and fields that model your domain. Fields are typed and can point to yet another object type you've defined.
+
+```ts
+objectType(config: NexusObjectTypeConfig<"Link">): NexusObjectTypeDef<"Link">
+
+const Post = objectType({
+name: 'Post',
+definition(t) {
+t.int('id')
+t.string('title')
+},
+```
+
+Define the fields of your object type.
+
+This method receives a type builder api that you will use to define the fields of your object type within. You can leverage conditionals, loops, other functions (that take the builder api as an argument), pull in variables from higher scopes, and so on, to help define your fields. However avoid two things:
+
+Doing asynchronous work when defining fields.
+Triggering side-effects that you would NOT want run at build time––as this code will run during build to support Nexus' reflection system.
+
+```ts
+(method) definition(t: ObjectDefinitionBlock<"Link">): void
+  objectType({
+    name: 'User',
+    definition(t) {
+      t.field('name', { type: 'String' })
+      t.string('status')
+      t.list.list.int('foo')
+      t.nullable.boolean('visible')
+      t.list.nonNull.field('friends', {
+        type: 'Friend',
+        // ...
+      })
+    },
+  })
+```
+
+@param t
+The type builder API for object types. The primary method you'll find is "t.field" but there are many convenient shorthands available as well, plus anything plugins have added. Explore each one's jsDoc for more detail.
+
+String types are scalars representing UTF-8 (aka. unicode) character sequences. It is most often used to represent free-form human-readable text. They are represented in JavaScript using the string primitive type.
+
+This is a shorthand, equivalent to: t.field('...', { type: string() })
+
+```ts
+(method) string<FieldName>(name: FieldName, ...config: [] | [OutputScalarConfig<"Link", FieldName>]): void
+  objectType({
+    name: 'User',
+    definition(t) {
+      t.string('bio')
+    },
+  })
+```
+
+@param name — The name of this field.
+
+@param config
+The configuration for things like the field's type, its description, its arguments, its resolver, and more. See jsdoc on each field within for details.
+
+- This parameter is optional if no resolver is required. No resolver is required if the source typing:
+- Has a field whose name matches this one
+- And whose type is compatible
+- And is a scalar
+  - ...in which case the default resolver will be available whose behaviour is to simply return that field from the received source type
+
+1. A field describes one discrete piece of information available to request within a selection set. They are in fact most of what any selection set will contain. Fields can be typed as scalars (marking the terminal point of a branch of a selection set) or as other object types in your schema thus allowing you to model relationships between things
+2. Boolean types are scalars representing true or false. They are represented in JavaScript using the boolean primitive type.
+
+___
+
+### References
+
+> Quotes and definitions directly from typescript docs and nexus docs within VS Code or website.
