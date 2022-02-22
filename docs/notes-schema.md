@@ -1,14 +1,21 @@
 
 # Notes for Schema
 
+___
+*Key*:
+
+- Ops: Operations
+- GQL: GraphQL
+
+___
+
 ## Schema
 
-A. schema.ts: generate schema w/ *Nexus*
+A. *schema.ts*: generate schema w/ *Nexus*
 
-- A schema is a collection of type definitions (hence "typeDefs") that together define the "shape" of queries that are executed against your data
+- defines structure/shape of the queries that'll be executed on the data
 - Schema is req so the gql service can define a set of types that describes the set of possible data one can query on that service
-- The type def enables a query which will return an array from server
-- defines structure of the data
+- The type def (collection of type definitions) of a schema enables a query which will return an array from server
 
 1. 1st output file: Nexus creates a GQL schema file w/ type *.graphql*
    1. GQL Schema Definition Langauge (*SDL*) which sets the structure of the API
@@ -72,7 +79,7 @@ then(onfulfilled?: ((value: ServerInfo) => ServerInfo | PromiseLike<ServerInfo>)
    2. explorer tab to test query
 
 ___
-//query graph directly
+> query graph directly
 
 ```shell
 curl --request POST \
@@ -144,10 +151,15 @@ ___
 
 ## GQL API Ddevelopment
 
-1. Use Nexus to Define the types, fields, root object types (components) of the schema
-2. run generate to create the GQL SDL & types (can use Nexus SDL converter)
+1. Create GQL module for the nexus code (GQL dir in src dir w/ index & Link files)
+2. Define type and link to makeSchema function via index.ts
+   1. index file is default entry point to a dir/modules so you can export all modules from index file in the GQL dir
+3. update schema.ts to use the GQL Module imports
+   1. imp graphql module & pass types to makeSchema func
+4. Use Nexus to Define the types, fields, root object types (components) of the schema
+5. run generate to create the GQL SDL & types (can use Nexus SDL converter)
    1. SDL Converter<https://nexusjs.org/converter>
-3. implement resolver functions
+6. implement resolver functions
 
 Object types are typically the most common kind of type present in a GraphQL schema. You give them a name and fields that model your domain. Fields are typed and can point to yet another object type you've defined.
 
@@ -161,8 +173,6 @@ t.int('id')
 t.string('title')
 },
 ```
-
-Define the fields of your object type.
 
 This method receives a type builder api that you will use to define the fields of your object type within. You can leverage conditionals, loops, other functions (that take the builder api as an argument), pull in variables from higher scopes, and so on, to help define your fields. However avoid two things:
 
@@ -187,13 +197,10 @@ Triggering side-effects that you would NOT want run at build time––as this c
 ```
 
 @param t
-The type builder API for object types. The primary method you'll find is "t.field" but there are many convenient shorthands available as well, plus anything plugins have added. Explore each one's jsDoc for more detail.
-
-String types are scalars representing UTF-8 (aka. unicode) character sequences. It is most often used to represent free-form human-readable text. They are represented in JavaScript using the string primitive type.
-
-This is a shorthand, equivalent to: t.field('...', { type: string() })
+The type builder API for object types. The primary method you'll find is *"t.field"*; This is a shorthand, equivalent to: t.field('...', { type: string() })
 
 ```ts
+import { objectType } from "nexus";
 (method) string<FieldName>(name: FieldName, ...config: [] | [OutputScalarConfig<"Link", FieldName>]): void
   objectType({
     name: 'User',
@@ -203,19 +210,20 @@ This is a shorthand, equivalent to: t.field('...', { type: string() })
   })
 ```
 
-@param name — The name of this field.
+1. imp object Type to make a new type in the schema
+2. name — The name of this field/type
+3. definition - add fields to the type
+   1. can config field's type, its description, its arguments, its resolver etc.
 
-@param config
-The configuration for things like the field's type, its description, its arguments, its resolver, and more. See jsdoc on each field within for details.
+- This parameter is optional if no resolver is required.
+- No resolver is required if the source typing:
+  - Has a field whose name matches this one And whose type is compatible
+  - And is a scalar: in which case the default resolver will be available whose behaviour is to simply return that field from the received source type
 
-- This parameter is optional if no resolver is required. No resolver is required if the source typing:
-- Has a field whose name matches this one
-- And whose type is compatible
-- And is a scalar
-  - ...in which case the default resolver will be available whose behaviour is to simply return that field from the received source type
-
-1. A field describes one discrete piece of information available to request within a selection set. They are in fact most of what any selection set will contain. Fields can be typed as scalars (marking the terminal point of a branch of a selection set) or as other object types in your schema thus allowing you to model relationships between things
-2. Boolean types are scalars representing true or false. They are represented in JavaScript using the boolean primitive type.
+1. A field describes one discrete piece of info available to request within a selection set.
+   1. Fields can be typed as scalars (marking the terminal point of a branch of a selection set) or as other object types in your schema thus allowing you to model relationships between things
+2. Boolean types are scalars representing true or false
+3. String types are scalars representing UTF-8 (aka. unicode) character sequences.
 
 ___
 

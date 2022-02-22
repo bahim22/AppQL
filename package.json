@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "ts-node-dev --transpile-only --no-notify --exit-child src/index.ts",
     "generate": "ts-node --transpile-only src/schema",
-    "prettier": "prettier 'src/**/*.ts' --write"
+    "prettier": "prettier src/**/*.ts --write"
   },
   "repository": {
     "type": "git",
