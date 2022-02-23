@@ -1,7 +1,7 @@
 {
 	"editor.formatOnSave": true,
 	// "eslint.format.enable": true,
-	// "eslint.enable": true,
+	"eslint.enable": false,
 	"prettier.endOfLine": "lf",
 	"prettier.enable": true,
 	// "eslint.packageManager": "yarn",

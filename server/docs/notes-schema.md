@@ -210,6 +210,18 @@ import { objectType } from "nexus";
   })
 ```
 
+### Example *Link.ts* info
+
+- Created Feed query that retrieves array of Link elements
+  - field name = id; type = Int
+  - field name = description; type = String
+  - field = url; type = String
+- Define Link type
+  - represents links that can be posted
+  - each Link contains a nonnullable id, description, url
+
+*/
+
 1. imp object Type to make a new type in the schema
 2. name — The name of this field/type
 3. definition - add fields to the type

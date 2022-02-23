@@ -1,5 +1,5 @@
 {
-  "name": "next-ded-apql",
+  "name": "next-ded-apql-server-dir",
   "version": "2.2.0",
   "description": "TypeScript React App using GraphQL, Apollo Client, Nexus",
   "main": "index.js",
