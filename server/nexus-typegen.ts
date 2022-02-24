@@ -53,7 +53,7 @@ export interface NexusGenFieldTypes {
     url: string; // String!
   }
   Query: { // field return type
-    ok: boolean; // Boolean!
+    feed: NexusGenRootTypes['Link'][]; // [Link!]!
   }
 }
 
@@ -64,7 +64,7 @@ export interface NexusGenFieldTypeNames {
     url: 'String'
   }
   Query: { // field return type name
-    ok: 'Boolean'
+    feed: 'Link'
   }
 }
 

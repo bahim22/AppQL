@@ -149,7 +149,7 @@ mutation {
 
 ___
 
-## GQL API Ddevelopment
+## GQL API Development
 
 1. Create GQL module for the nexus code (GQL dir in src dir w/ index & Link files)
 2. Define type and link to makeSchema function via index.ts
@@ -196,8 +196,7 @@ Triggering side-effects that you would NOT want run at build time––as this c
   })
 ```
 
-@param t
-The type builder API for object types. The primary method you'll find is *"t.field"*; This is a shorthand, equivalent to: t.field('...', { type: string() })
+> @param t: The type builder API for object types. The primary method you'll find is *"t.field"*; (shorthand for:  t.field('...', { type: string() });)
 
 ```ts
 import { objectType } from "nexus";
@@ -220,8 +219,6 @@ import { objectType } from "nexus";
   - represents links that can be posted
   - each Link contains a nonnullable id, description, url
 
-*/
-
 1. imp object Type to make a new type in the schema
 2. name — The name of this field/type
 3. definition - add fields to the type
@@ -232,12 +229,54 @@ import { objectType } from "nexus";
   - Has a field whose name matches this one And whose type is compatible
   - And is a scalar: in which case the default resolver will be available whose behaviour is to simply return that field from the received source type
 
-1. A field describes one discrete piece of info available to request within a selection set.
-   1. Fields can be typed as scalars (marking the terminal point of a branch of a selection set) or as other object types in your schema thus allowing you to model relationships between things
-2. Boolean types are scalars representing true or false
-3. String types are scalars representing UTF-8 (aka. unicode) character sequences.
+- A *field* describes one discrete piece of info available to request within a selection set.
+  - "Fields can be typed as scalars (marking the terminal point of a branch of a selection set) or as other object types in your schema thus allowing you to model relationships between things"
 
-___
+1. The objectType is used to define the variable being stored
+2. extend Query root type & add another root field (users)
+3. define return type of users query (nonNull array)
+4. resolver function of users query is named resolve
+   1. the implementation for a GQL field that's executed in order to get the return value after the type is fetched
+   2. some fields don't need explicit resolvers & GQL lets trivial resolvers be omitted
+
+> query = fields sourced by typeDefs from schema
+> GQL server invokes resolver fun & returns reponse (data stored in variable that was queried)
+> nested queries: resolver execution level w/in the query that GQL can return either all info or specific info
+
+### Extend Type
+
+- "This is useful when splitting your schema's type definitions across modules wherein each module is concerned with its own domain (User, Post, Comment, etc.). You may discover that some types are shared across domains and you want to co-locate the definition of the field contributions to where the domains they relate to are".
+  - "example is contributing fields to root types Query, Mutation, or Subscription. Note that this use-case is so common Nexus ships dedicated functions for it: queryField, mutationField, subscriptionField."
+
+```ts
+@example
+
+  // types/User.ts
+  export const User = objectType({
+    name: 'User',
+    // ...
+  })
+
+  export const UserQuery = extendType({
+    type: 'Query',
+    definition(t) {
+      t.list.nonNull.field('users', {
+        type: 'User',
+        resolve() {
+          return // ...
+        },
+      })
+    },
+  })
+```
+
+- @param config: The specification of which type to extend and how. This is basically a subset of the configuration object passed to the objectType function
+- Can chain field types w/ other types.
+  - (shorthand for: t.field('...', { type: list('...') });)
+
+- FieldResolver(source: {}, args: any, context: any, info: GraphQLResolveInfo): any
+  - The source data for the GraphQL object that this field belongs to
+  - if a field has defined args then the param will include the args passed by the client
 
 ### References
 

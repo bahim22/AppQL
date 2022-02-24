@@ -9,5 +9,5 @@ type Link {
 }
 
 type Query {
-  ok: Boolean!
+  feed: [Link!]!
 }
