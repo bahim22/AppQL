@@ -7,9 +7,9 @@
 
 | Title            | Date       | Author       | Description                                     |
 | ---------------- | ---------- | ------------ | ----------------------------------------------- |
-| next-ded-apql | 02/01/2022 | `Hima Balde` | Microservice Base with graphQL and Apollo |
+| AppQL | 02/01/2022 | `Hima Balde` | Microservice Base with graphQL and Apollo |
 
-| Type                 | Use Case        | Completed | OS       |
+| Type                 | Future Use Case        | Branch | OS       |
 | -------------------- | --------------- | --------- | -------- |
 | GraphQL API ⚛️ | Full Stack App | Master 🏁 | macOS ✔️ |
 
