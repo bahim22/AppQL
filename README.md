@@ -7,15 +7,18 @@
 
 | Title            | Date       | Author       | Description                                     |
 | ---------------- | ---------- | ------------ | ----------------------------------------------- |
-| next-ded-apql | 02/01/2022 | `Hima Balde` | Next App with graphQL and Apollo |
+| next-ded-apql | 02/01/2022 | `Hima Balde` | Microservice Base with graphQL and Apollo |
 
 | Type                 | Use Case        | Completed | OS       |
 | -------------------- | --------------- | --------- | -------- |
-| Next.js with API ⚛️ | Full Stack App | Master 🏁 | macOS ✔️ |
+| GraphQL API ⚛️ | Full Stack App | Master 🏁 | macOS ✔️ |
 
 ---
 
 ## Notes for graphql, apollo backend
+
+- Base Repo to be used in a Future Full-stack Project
+- Featured Projects: 
 
 ## packages used in stack
 
@@ -24,7 +27,6 @@
 - graphQL server based on express
 - support for apollo explorer and graphQL playground
 - can be config to be used with express server
-- deployable to multiple services
 
 ### *Nexus*
 
@@ -38,15 +40,12 @@
 - online, web-based GQL IDE
 - use for running queries & exploring schema
 
-## Dataset
+## Tasks
 
-## Define a resolver
-
-## create schema and server
-
-## ApolloServer: create instance of server and start server
-
-## Exe init query
+- Dataset info & Define a resolver
+- create schema and server
+- ApolloServer: create instance of server and start server
+- Exe initial query
 
 ### References
 
